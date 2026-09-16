@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c101c">
+  <meta name="description" content="An interactive playground for colorful, nested geometric shapes.">
+  <title>TraceGraph2X — Shape playground</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="geometry.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="./"><span class="brand-icon">◎</span> TraceGraph<span>2X</span></a><span class="header-note">A little geometry. Infinite possibilities.</span><a class="repo" href="https://github.com/sdg5-hub/TraceGraph2X" target="_blank" rel="noreferrer">GitHub ↗</a></header>
+  <main>
+    <aside>
+      <div class="intro"><span class="eyebrow">SHAPE PLAYGROUND</span><h1>Start with a point.<br>Make something beautiful.</h1><p>Layer, color, and set your geometry in motion.</p></div>
+      <section><h2><span>01</span> Choose your shape</h2><div id="shapes" class="shape-grid" role="group" aria-label="Shape"></div></section>
+      <section><h2><span>02</span> Build your pattern</h2>
+        <div class="control"><label for="layers">Layers <output id="layersValue"></output></label><input id="layers" type="range" min="1" max="60" value="22"></div>
+        <div class="control"><label for="size">Starting size <output id="sizeValue"></output></label><input id="size" type="range" min="5" max="150" value="20"></div>
+        <div class="control"><label for="spacing">Layer spacing <output id="spacingValue"></output></label><input id="spacing" type="range" min="1" max="24" step="0.5" value="9"></div>
+        <div class="control"><label for="thickness">Line thickness <output id="thicknessValue"></output></label><input id="thickness" type="range" min="0.5" max="6" step="0.5" value="1.5"></div>
+        <div class="control"><label for="rotation">Rotation <output id="rotationValue"></output></label><input id="rotation" type="range" min="-180" max="180" value="0"></div>
+        <div class="coordinate-label">Starting point <button id="center" class="text-button">Recenter</button></div>
+        <div class="coordinates"><label for="x">X <input id="x" type="number" min="-500" max="500" value="0"></label><label for="y">Y <input id="y" type="number" min="-500" max="500" value="0"></label></div>
+        <p class="hint">Or click anywhere on the grid.</p>
+      </section>
+      <section><h2><span>03</span> Add some color</h2><div id="palettes" class="palettes" role="group" aria-label="Color palette"></div><div class="custom-color"><label for="color">Custom color</label><input id="color" type="color" value="#ac83ff"></div></section>
+      <button id="reset" class="reset">↺ Reset playground</button>
+    </aside>
+    <div class="workspace">
+      <div class="workspace-top"><div><span class="live-dot"></span> LIVE CANVAS <span class="tag" id="shapeTag">HEART</span></div><button id="export" class="export">↓ Export SVG</button></div>
+      <div class="canvas-wrap" id="canvasWrap">
+        <svg id="canvas" xmlns="http://www.w3.org/2000/svg" viewBox="-500 -400 1000 800" role="img" aria-labelledby="canvasTitle canvasDesc"><title id="canvasTitle">Nested heart pattern</title><desc id="canvasDesc">Interactive coordinate grid. Use the starting point fields to position the shapes.</desc><defs><pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M 25 0 L 0 0 0 25" fill="none" stroke="#ffffff" stroke-opacity=".055" stroke-width="1"/></pattern></defs><rect id="background" x="-500" y="-400" width="1000" height="800" fill="#0c101c"/><g id="gridGroup"><rect x="-500" y="-400" width="1000" height="800" fill="url(#grid)"/><path d="M-500 0H500 M0-400V400" stroke="#344052" stroke-width="1"/><g id="ticks"></g></g><g id="art"></g><g id="origin"><circle r="5" fill="#e6ddff" stroke="#0c101c" stroke-width="2"/></g></svg>
+        <div class="canvas-note">CLICK TO PLACE YOUR ORIGIN</div><div class="canvas-zoom"><button id="zoomOut" aria-label="Zoom out">−</button><output id="zoomValue">100%</output><button id="zoomIn" aria-label="Zoom in">+</button><button id="fit" title="Fit the entire pattern">Fit</button></div>
+      </div>
+      <div class="transport"><button id="play" class="play">▶ Animate</button><button id="restart" class="restart" aria-label="Restart animation">↺</button><div class="speed"><label for="speed">Speed</label><input id="speed" type="range" min="0.25" max="3" step="0.25" value="1"><output id="speedValue">1×</output></div><label class="toggle"><input id="loop" type="checkbox" checked> Loop</label><label class="toggle"><input id="gridToggle" type="checkbox" checked> Grid</label></div>
+      <footer><span id="summary">22 layers · Heart · Aurora</span><span>Made to be explored.</span></footer><div id="status" class="sr-only" role="status"></div>
+    </div>
+  </main>
+</body></html>
